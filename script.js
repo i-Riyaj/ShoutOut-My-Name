@@ -1,8 +1,6 @@
 const targetParent = document.querySelectorAll('.target')[0];
 const targetPara = document.querySelector('p');
 
-const backHome = document.createElement('Home');
-
 targetPara.addEventListener( 'click', (e)=>{
     e.preventDefault();
     e.stopPropagation();
