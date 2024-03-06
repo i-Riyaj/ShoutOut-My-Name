@@ -1,6 +1,7 @@
 const targetParent = document.querySelectorAll('.target')[0];
 const targetPara = document.querySelector('p');
 
+const backHome = document.createElement('Home');
 
 targetPara.addEventListener( 'click', (e)=>{
     e.preventDefault();
@@ -12,24 +13,29 @@ targetPara.addEventListener( 'click', (e)=>{
 const askforInput = () => {
     document.body.style.opacity = "100%";
     targetParent.classList.remove("border");
-    targetPara.innerHTML = '<input type="text" name="askingNameOfUser" id="inputField">';
+    targetParent.innerHTML = '<div id="inputSection"><label for="enterName">Enter your name:</label><input type="text" name="enterName" id="enterName"></div>';
 
-    const inputField = document.querySelector('#inputField');
-    inputField.classList.add('inputNameArea');
+    const enterName = document.querySelector('#enterName');
+    targetParent.classList.add('flex');
+    targetParent.classList.add('flex');
+    enterName.classList.add('enterNameArea');
+    document.querySelector('#inputSection').classList.add('flexRow');
 
-    inputField.addEventListener( 'click', (e)=>{
+    enterName.addEventListener( 'click', (e)=>{
         e.preventDefault();
         e.stopPropagation();
 
         giveInputAndSubmit();
     }, false )
+   
 }
 
 const giveInputAndSubmit = () => {
-   const submitBTN = document.createElement('button');
+   if(targetParent.childElementCount === 1){
+    const submitBTN = document.createElement('button');
    submitBTN.innerHTML = 'submit';
    submitBTN.classList.add('submitBTNstyle');
-   targetPara.appendChild(submitBTN);
+   targetParent.appendChild(submitBTN);
 
    submitBTN.addEventListener( 'click', (e)=>{
     e.preventDefault();
@@ -37,37 +43,37 @@ const giveInputAndSubmit = () => {
 
     analyzeInputAndGiveOutput();
    }, false )
+   }
 }
 
 const analyzeInputAndGiveOutput = () => {
-    if(inputField.value === undefined || 
-        inputField.value === null || 
-        inputField.value.length <= 2){
-        alert(`${inputField.value} is not a valid name, Please enter a valid name!`); 
+    if(enterName.value === undefined || 
+        enterName.value === null || 
+        enterName.value.length <= 2){
+        alert(`${enterName.value} is not a valid name, Please enter a valid name!`); 
         tryAgain();
     } else {
-        targetPara.innerHTML = `Welcome ${inputField.value}`;
+        targetParent.innerText = `Welcome ${enterName.value}`;
         
         const playAgainBtn = document.createElement('button');
-        playAgainBtn.innerHTML = 'Play Again';
+        playAgainBtn.innerText = 'Play Again';
         playAgainBtn.classList.add("playAgainBtnStyle");
         document.body.appendChild(playAgainBtn);
         playAgainBtn.addEventListener( 'click', (e)=>{
             e.preventDefault();
             e.stopPropagation();
             document.body.removeChild(playAgainBtn);
-            backToHome();
+            enterNameAgain();
         }, false )
     };
 }
 
 const tryAgain = () => {
-    inputField.value = '';
+    enterName.value = '';
     askforInput();
 }
 
-const backToHome = () => {
-   document.body.style.opacity = "20%";
-   targetPara.innerHTML = 'CLick on Me!';
-   targetParent.classList.add("border");
+const enterNameAgain = () => {
+   askforInput();
+   
 }

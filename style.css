@@ -19,6 +19,8 @@ body {
 
     opacity: 20%;
 
+    padding: 3rem;
+
     background-color: var(--bgColor);
     color: var(--textColor);
 }
@@ -31,6 +33,11 @@ body {
     align-items: center;
 }
 
+.flexRow {
+    display: flex;
+    gap: 1rem;
+}
+
 .border {
     border-radius: 50%;
     border: white 0.2rem solid;
@@ -40,9 +47,10 @@ body {
     padding: 3rem;
 }
 
-.inputNameArea {
-    height: 4rem;
-    width: 20rem;
+.enterNameArea {
+    width: 30rem;
+
+    font-size: 2.5rem;
     
     padding: 0.5rem;
 
@@ -79,11 +87,15 @@ body {
     border-radius: 0.5rem;
 }
 
-@media (max-width: 350px){
-    p.flexPara {
+@media (max-width: 550px){
+    div#resDiv {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
+    }
+    #inputSection{
+        flex-direction: column;
+        gap: 1rem;
     }
 }
